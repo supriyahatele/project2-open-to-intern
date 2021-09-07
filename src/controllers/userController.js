@@ -8,6 +8,20 @@ let getBooks= async function (req, res) {
 }
 
 let getUsers= async function (req, res) {
+    
+    let a = 5
+    let b = 3
+    let c = a + b
+    let users=  await userModel.find()  // is executed but not completed..await signals that please dont execute next line till this line is completed..i.e await is asking the program to wait for completion of this line
+
+    //async-await 
+
+// When is await used: -
+    // when interacting with database
+    // when interacting with another server( axios/ request)
+
+    console.log("OUR DATA IS HERE", users)  // promise pending if we dont use await
+
     allUsers = await userModel.find()  
     res.send({ "allUserDetails": allUsers })
 }

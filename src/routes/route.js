@@ -18,14 +18,17 @@ router.get('/userList', userController.getUsers);
 router.post('/createUser', userController.createNewUser);
 
 // Sport Center
-//router.post('/sportcenters', sportCenterController.registerCenter)
+
+
+router.post('/sportcenters', sportCenterController.registerCenter)
 router.get('/sportcenters', sportCenterController.fetchCenters)
-//router.put('/sportcenters/:centerId', sportCenterController.updateCenter)
+router.put('/sportcenters/:centerId', sportCenterController.updateCenter)
 //router.get('/group1', sportCenterController.aggregateCenters1)
 //router.get('/group2', sportCenterController.aggregateCenters2)
 
 // Booking
-//router.post('/bookings', bookingController.createBooking)
+router.post('/bookings', bookingController.createBooking)
+router.get('/bookings/:bookingId', bookingController.getBooking)
 //router.get('/bookings', bookingController.getBookings)
 
 module.exports = router;

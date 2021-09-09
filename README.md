@@ -73,7 +73,7 @@
       "address": {
     "pin": 110012,
     "landmark": "CR Park"
-  },
+  }
 }
 ```
 

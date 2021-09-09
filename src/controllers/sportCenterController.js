@@ -1,28 +1,28 @@
 const mongoose = require('mongoose')
 let sportCenterModel = require("../models/sportCenterModel.js")
 
-
-// let registerCenter = async function (req, res) {
-//     try {
-//         if (req.body) {
-//             let center = req.body
-//             let newCenter = {
-//                 name: center.name,
-//                 city: center.city,
-//                 state: center.state,
-//                 sports: center.sports
-//             }
-//             let createdCenter = await sportCenterModel.create(newCenter)
-//             res.send(`You have successfully registered the following sport center: ${createdCenter}`)
-//         } else {
-//             res.send("not a valid create request")
-//         }
-//     }
-//     catch (err) {
-//         console.log("Error in creating the sport center ", err);
-//         res.send({ "error: ": err });
-//     }
-// }
+let registerCenter = async function (req, res) {
+    try {
+        if (req.body) {
+            let center = req.body
+            let newCenter = {
+                name: center.name,
+                city: center.city,
+                state: center.state,
+                sports: center.sports,
+                address: center.address
+            }
+            let createdCenter = await sportCenterModel.create(newCenter)
+            res.send(`You have successfully registered the following sport center: ${createdCenter}`)
+        } else {
+            res.send("not a valid create request")
+        }
+    }
+    catch (err) {
+        console.log("Error in creating the sport center ", err);
+        res.send({ "error: ": err });
+    }
+}
 
 let fetchCenters = async function (req, res) {
     try {
@@ -45,20 +45,21 @@ let fetchCenters = async function (req, res) {
 
 }
 
-// let updateCenter = async function (req, res) {
-//     try {
-//         // let cityName = req.query.city
-//         // let regex = new RegExp(`.*${cityName}.*`, 'i')
-//         // console.log(cityName)
-//         let centerId = req.params.centerId
-//         let updatedCenters = await sportCenterModel.findOneAndUpdate({ _id: centerId, 'sports.id':1 },{$set: {'sports.$[]': 'Badminton'}},{new: true})
-//         res.send({ data: updatedCenters })
-//     } catch (error) {
-//         console.log("Error in updating the sport centers", error);
-//         res.send({ "error: ": error });
-//     }
+let updateCenter = async function (req, res) {
+    try {
+        // let cityName = req.query.city
+        // let regex = new RegExp(`.*${cityName}.*`, 'i')
+        // console.log(cityName)
+        let newSport = req.body.newSport
+        let centerId = req.params.centerId
+        let updatedCenters = await sportCenterModel.findOneAndUpdate({ _id: centerId}, {$push: {'sports': newSport}}, {new: true})
+        res.send({ data: updatedCenters })
+    } catch (error) {
+        console.log("Error in updating the sport centers", error);
+        res.send({ "error: ": error });
+    }
 
-// }
+}
 
 // let aggregateCenters1 = async function (req, res) {
 //     try {
@@ -101,8 +102,12 @@ let fetchCenters = async function (req, res) {
 //     }
 // }
 
-//module.exports.registerCenter = registerCenter
+module.exports.registerCenter = registerCenter
 module.exports.fetchCenters = fetchCenters
-//module.exports.updateCenter = updateCenter
+module.exports.updateCenter = updateCenter
 //module.exports.aggregateCenters1 = aggregateCenters1
 //module.exports.aggregateCenters2 = aggregateCenters2
+
+
+//Updating value in array 
+//Updating value in an object

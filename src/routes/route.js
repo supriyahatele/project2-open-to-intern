@@ -2,6 +2,8 @@ const express = require('express');
 
 const userController = require('../controllers/userController')
 const bookController = require('../controllers/bookController')
+const sportCenterController = require('../controllers/sportCenterController')
+const bookingController = require('../controllers/bookingController')
 
 const router = express.Router();
 
@@ -14,5 +16,14 @@ router.post('/createBook', bookController.createNewBook);
 
 router.get('/userList', userController.getUsers);
 router.post('/createUser', userController.createNewUser);
+
+// Sport Center
+//router.post('/sportcenters', sportCenterController.registerCenter)
+router.get('/sportcenters', sportCenterController.fetchCenters)
+//router.put('/sportcenters/:centerId', sportCenterController.updateCenter)
+
+// Booking
+//router.post('/bookings', bookingController.createBooking)
+//router.get('/bookings', bookingController.getBookings)
 
 module.exports = router;

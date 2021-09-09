@@ -4,6 +4,7 @@ const userController = require('../controllers/userController')
 const bookController = require('../controllers/bookController')
 const sportCenterController = require('../controllers/sportCenterController')
 const bookingController = require('../controllers/bookingController')
+const sportPersonController = require('../controllers/sportPersonController')
 
 const router = express.Router();
 
@@ -31,4 +32,8 @@ router.post('/bookings', bookingController.createBooking)
 router.get('/bookings/:bookingId', bookingController.getBooking)
 //router.get('/bookings', bookingController.getBookings)
 
+router.post('/sportsPerson', sportPersonController.sportPerson)
+router.get('/sportsPersons/:sportsPersonId', sportPersonController.sportPersonId)
+
 module.exports = router;
+

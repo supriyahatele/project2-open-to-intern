@@ -21,6 +21,8 @@ router.post('/createUser', userController.createNewUser);
 //router.post('/sportcenters', sportCenterController.registerCenter)
 router.get('/sportcenters', sportCenterController.fetchCenters)
 //router.put('/sportcenters/:centerId', sportCenterController.updateCenter)
+//router.get('/group1', sportCenterController.aggregateCenters1)
+//router.get('/group2', sportCenterController.aggregateCenters2)
 
 // Booking
 //router.post('/bookings', bookingController.createBooking)

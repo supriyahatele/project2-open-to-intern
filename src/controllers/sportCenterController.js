@@ -60,6 +60,49 @@ let fetchCenters = async function (req, res) {
 
 // }
 
+// let aggregateCenters1 = async function (req, res) {
+//     try {
+//         let centers = await sportCenterModel.aggregate([
+//             {
+//               $group: {
+//                 // Each `_id` must be unique, so if there are multiple
+//                 // documents with the same age, MongoDB will increment `count`.
+//                 _id: '$city',
+//                 count: { $sum: 1 }
+//               }
+//             }
+//           ]);
+//           centers.forEach(c => console.log(c))
+//           res.send(`Result of simple grouping is: ${centers}`)
+//     } catch (error) {
+//         console.log("Error in updating the sport centers", error);
+//         res.send({ "error: ": error });
+//     }
+// }
+
+// let aggregateCenters2 = async function (req, res) {
+//     try {
+//         let centers = await sportCenterModel.aggregate([
+//             { $match: { sports: { $size: 5 } } },
+//             {
+//               $group: {
+//                 // Each `_id` must be unique, so if there are multiple
+//                 // documents with the same age, MongoDB will increment `count`.
+//                 _id: '$city',
+//                 count: { $sum: 1 }
+//               }
+//             }
+//           ]);
+//           centers.forEach(c => console.log(c))
+//           res.send(`Result of simple grouping is: ${centers}`)
+//     } catch (error) {
+//         console.log("Error in updating the sport centers", error);
+//         res.send({ "error: ": error });
+//     }
+// }
+
 //module.exports.registerCenter = registerCenter
 module.exports.fetchCenters = fetchCenters
 //module.exports.updateCenter = updateCenter
+//module.exports.aggregateCenters1 = aggregateCenters1
+//module.exports.aggregateCenters2 = aggregateCenters2

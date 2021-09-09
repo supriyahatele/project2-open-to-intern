@@ -6,6 +6,7 @@ const sportCenterSchema = new mongoose.Schema({
     city: String,
     state: String,
     sports: [String],
+    address: Object,
     isOpen: {
         type: Boolean,
         default: false

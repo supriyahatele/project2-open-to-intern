@@ -9,6 +9,10 @@
   "name": "Gymkhana Club",
   "city": "Ankleshwar",
   "state": "Gujarat",
+  "address": {
+    "pin": 393010,
+    "landmark": "GNFC Park"
+  },
   "sports": [
     "Swimming",
     "Skating",
@@ -22,7 +26,11 @@
     "name": "YMCA",
     "city": "Noida",
     "state": "Uttar Pradesh",
-    "sports": ["Table Tennis", "Cricket", "Squash"]
+    "sports": ["Table Tennis", "Cricket", "Squash"],
+      "address": {
+    "pin": 201309,
+    "landmark": "Escorts Hospital"
+  },
 }
 ```
 
@@ -31,7 +39,28 @@
     "name": "Yamuna Sports Complex",
     "city": "Delhi",
     "state": "Delhi",
-    "sports": ["Football", "Athletics"]
+    "sports": ["Football", "Athletics"],
+      "address": {
+    "pin": 110011,
+    "landmark": "Karkardooma Metro Station"
+  },
+}
+```
+
+```yaml
+{
+  "name": "Ace Health Academy",
+  "city": "Ankleshwar",
+  "state": "Gujarat",
+  "address": {
+    "pin": 393011,
+    "landmark": "Schlumberger Building"
+  },
+  "sports": [
+    "Swimming",
+    "Skating",
+    "Badminton"
+  ]
 }
 ```
 
@@ -40,7 +69,11 @@
     "name": "Nehru Stadium",
     "city": "New Delhi",
     "state": "Delhi",
-    "sports": ["Tennis", "Karate", "Jiu Jitsu"]
+    "sports": ["Tennis", "Karate", "Jiu Jitsu"],
+      "address": {
+    "pin": 110012,
+    "landmark": "CR Park"
+  },
 }
 ```
 

@@ -5,7 +5,8 @@
 ## Phase I
 
 ### Key points
-- Refer the Notes at the bottom
+- Create a group database `groupXDatabase`. You can clean the db you previously used and resue that.
+- This time each group should have a *single git branch*. Coordinate amongst yourselves by ensuring every next person pulls the code last pushed by a team mate. You branch will be checked as part of the demo. Branch name should follow the naming convention `project/internshipGroupX`
 - Follow the naming conventions exactly as instructed. The backend code will be integrated with the front-end application which means any mismatch in the expected request body will lead to failure in successful integration.
 
 ### Models
@@ -34,7 +35,7 @@
 ### GET /functionup/collegeDetails
 - Returns the college details for the requested college (Expect a query parameter by the name `collegeName`. This is anabbreviated college name. For example `iith`)
 - Returns the list of all interns who have applied for internship at this college.
-- The response structure should look like [this]()
+- The response structure should look like [this](#college-details)
 
 
 ## Testing 
@@ -85,8 +86,7 @@ Refer below sample
     "name" : "Jane Does",
     "email" : "jane.doe@iith.in",
     "mobile" : "90000900000",
-    "collegeId" : ObjectId("611771129c9ea621dc7f5e3b"),
-    "cvLink" : ""
+    "collegeId" : ObjectId("888771129c9ea621dc7f5e3b")
 }
 ```
 ## Response samples
@@ -127,8 +127,3 @@ Refer below sample
   }
 }
 ```
-
-
-#### Note: 
-- Create a group database `groupXDatabase`. You can clean the db you previously used and resue that.
-- This time each group should have a *single git branch*. Coordinate amongst yourselves by ensuring every next person pulls the code last pushed by a team mate. You branch will be checked as part of the demo. Branch name should follow the naming convention `project/internshipGroupX`

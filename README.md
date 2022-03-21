@@ -1,4 +1,4 @@
-# titaniumaplus
+# Thorium
 
 ## Open to Intern Project Requirement
 

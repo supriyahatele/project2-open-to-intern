@@ -1,4 +1,4 @@
-# Thorium
+# Uranium
 
 ## Open to Intern Project Requirement
 

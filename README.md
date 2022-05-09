@@ -96,7 +96,7 @@ Refer below sample
     "name": "xyz",
     "fullName": "Some Institute of Engineering and Technology",
     "logoLink": "some public s3 link for a college logo",
-    "interests": [
+    "interns": [
       {
         "_id": "123a47301a53ecaeea02be59",
         "name": "Jane Doe",

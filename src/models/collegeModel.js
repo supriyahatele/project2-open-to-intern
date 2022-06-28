@@ -1,3 +1,4 @@
+dew
 const mongoose = require('mongoose');
 
 const collegeModel = new mongoose.Schema({
@@ -13,7 +14,7 @@ const collegeModel = new mongoose.Schema({
         trim: true,
         required: "Fullname is required"
     },
-    logoLink: {
+       logoLink: {
         required: "This is required",
         type: String    
     },

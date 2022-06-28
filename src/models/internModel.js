@@ -32,4 +32,4 @@ const InternModel= new mongoose.Schema({
 
 
 
-module.exports = mongoose.model('Intern', In)
+module.exports = mongoose.model('Intern', InternModel)

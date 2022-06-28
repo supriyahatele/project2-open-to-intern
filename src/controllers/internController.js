@@ -15,7 +15,7 @@ const createintern  = async function (req, res) {
    }
 
 
-module.exports.createintern = createintern
+module.exports={createintern}
 
 
 

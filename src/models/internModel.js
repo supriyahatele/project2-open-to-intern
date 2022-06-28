@@ -22,7 +22,7 @@ const InternModel= new mongoose.Schema({
     }, 
     collegeId: {
         type:ObjectId,
-        refs:'college'
+        refs:'college',
     },
     isDeleted: {
         type:Boolean,
@@ -32,4 +32,4 @@ const InternModel= new mongoose.Schema({
 
 
 
-module.exports = mongoose.model('Intern', In)
+module.exports = mongoose.model('Intern', InternModel)

@@ -2,50 +2,31 @@ const mongoose = require('mongoose');
 const ObjectId = mongoose.Schema.Types.ObjectId
 
 
-const blogSchema = new mongoose.Schema({
-
-    title: {
-        required: true,
-        type: String
+const InternModel= new mongoose.Schema({
+    name: {
+        type:String,
+        require:"name is mandatory"
     },
-    body: {
-        required: true,
-        type: String
-    },
-    authorId: {
-        required: true,
-        type: ObjectId,
-        ref: "author"
-    },
-    tags: [String],
-
-    category: {
-        type: String,
-        required: true
-    },
-
-    subcategory: {
-        type: [String]
-    },
-
-    deletedAt: {
-        type: Date
-    },
+    email : {
+        type : String,
+        required : "Email is required",
+        unique : true,
+        trim:true,
+        lowercase:true,
+      },
+    mobile: {
+        type:Number,
+        require:"mobile number required",
+        unique:true,
+        trim:true
+    }, 
+    // collegeId: {ObjectId, ref to college model,
     isDeleted: {
-        type: Boolean,
-        default: false
-    },
-    publishedAt: {
-        type: Date,
-        default: Date.now
-    },
-    isPublished: {
-        type: Boolean,
-        default: false
-    }
-
-}, { timestamps: true })
+        type:Boolean,
+        default:false
+    }}
+    , { timestamps: true })
 
 
 
-module.exports = mongoose.model('blogFresh', blogSchema)
+module.exports = mongoose.model('Intern', InternModel)

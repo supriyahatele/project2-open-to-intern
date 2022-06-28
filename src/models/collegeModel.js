@@ -1,33 +1,27 @@
 const mongoose = require('mongoose');
 
-const authorSchema = new mongoose.Schema({
+const collegeModel = new mongoose.Schema({
 
     name: {
         type: String,
-        required: true,
+        required: "Name is required",
+        trim: true,
         unique: true
     },
-    lname: {
+    fullName: {
         type: String,
-        required: true
+        trim: true,
+        required: "Fullname is required"
     },
-    title: {
-        type: String,
-        required: true,
-        enum: ["Mr", "Mrs", "Miss"]
+    logoLink: {
+        required: "This is required",
+        type: String    
     },
-    email: {
-       
-        type:String,
-        required : true,
-        unique : true,
-        trim: true
-    },
-    password: {
-        required: true,
-        type: String
+    isDeleted: {
+        type: Boolean,
+        default: false
     }
     
 },{ timestamps: true })
 
-module.exports = mongoose.model('author', authorSchema)
+module.exports = mongoose.model('college', collegeModel)

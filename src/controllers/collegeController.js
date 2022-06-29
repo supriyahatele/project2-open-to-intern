@@ -11,7 +11,8 @@ const isvalid=function(value){
 
 }
 let linkCheck=/(https?:\/\/.*\.(?:jpg|jpeg|png|gif))/i
-let nameCheck=/(?:[0-9])+/i
+// let nameCheck=/([a-z]|[A-Z])$/
+// let fullNameCheck=/[a-z]+\s[a-z ]+\s[a-z, ]+$/
 
 // ===============================[createCollage]=========================================
 const createCollage  = async function (req, res) {
@@ -20,10 +21,11 @@ const createCollage  = async function (req, res) {
     const {name,fullName,logoLink}=data
     
     if(!isvalid(name))return res.status(400).send({status:false, msg:"name is required"})
-    if(nameCheck.test(name))return res.status(400).send({status:false, msg:"name write in carrectway"})
     if(!isvalid(fullName)) return res.status(400).send({status:false, msg:"fullName is required"})
-    if(nameCheck.test(fullName))return res.status(400).send({status:false, msg:"fullName write in carrectway"})
-
+    // =================================================================
+    // if(!nameCheck.test(name))return res.status(400).send({status:false, msg:"name write in carrectway"})
+    // if(!fullNameCheck.test(fullName))return res.status(400).send({status:false, msg:"fullName write in carrectway"})
+      // =====================================================
     if(!isvalid(logoLink)) return res.status(400).send({status:false, msg:"logoLink is required"})
     
 

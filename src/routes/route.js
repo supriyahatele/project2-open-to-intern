@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router();
 const { createCollage, getCollageDetail }=require("../controllers/collegeController")
 const {createintern}=require("../controllers/internController")
+const collagemodel = require("../models/collegeModel")
+const internModel = require("../models/internModel")
+
 
 
 

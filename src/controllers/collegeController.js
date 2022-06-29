@@ -11,20 +11,21 @@ const isvalid=function(value){
 
 }
 let linkCheck=/(https?:\/\/.*\.(?:jpg|jpeg|png|gif))/i
-// let nameCheck=/([a-z]|[A-Z])$/
-// let fullNameCheck=/[a-z]+\s[a-z ]+\s[a-z, ]+$/
+let nameCheck = /^[a-zA-Z]+$/
+let fullNameCheck =/[a-zA-Z]+\s[a-z A-Z ]+\s[a-z, A-Z, ]+$/
 
 // ===============================[createCollage]=========================================
 const createCollage  = async function (req, res) {
     try{
     const data=req.body
     const {name,fullName,logoLink}=data
+    // let name= name.toLowerCase()
     
     if(!isvalid(name))return res.status(400).send({status:false, msg:"name is required"})
     if(!isvalid(fullName)) return res.status(400).send({status:false, msg:"fullName is required"})
     // =================================================================
-    // if(!nameCheck.test(name))return res.status(400).send({status:false, msg:"name write in carrectway"})
-    // if(!fullNameCheck.test(fullName))return res.status(400).send({status:false, msg:"fullName write in carrectway"})
+    if(!nameCheck.test(name))return res.status(400).send({status:false, msg:"don't use spaces, number and special character"})
+    if(!fullNameCheck.test(fullName))return res.status(400).send({status:false, msg:"fullName write in correctway"})
       // =====================================================
     if(!isvalid(logoLink)) return res.status(400).send({status:false, msg:"logoLink is required"})
     
@@ -32,7 +33,7 @@ const createCollage  = async function (req, res) {
     if(!linkCheck.test(logoLink)) return res.status(400).send({status:false, msg:"logoLink invalid"})
 
     //name unique test
-    const dataCheck=await collagemodel.findOne({name:name})
+      const dataCheck = await collagemodel.findOne({ name: name.toLowerCase()})
     if(dataCheck)return res.status(400).send({status:false, msg:"name is already exist"})
 
     const savedate=await collagemodel.create(data)
@@ -48,7 +49,7 @@ const createCollage  = async function (req, res) {
     const collegeName = req.query.name
     if (!isvalid(collegeName)) return res.status(400).send({ status: false, msg: "Enter valid college Name"})
 
-    const savedata = await collagemodel.findOne({name: collegeName})
+      const savedata = await collagemodel.findOne({ name: collegeName.toLowerCase() })
     if(!savedata) return res.status(404).send({status:false, msg:" College Not found"})
       const { name, fullName, logoLink } = savedata
 

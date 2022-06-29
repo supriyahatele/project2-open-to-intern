@@ -7,11 +7,11 @@ const isvalid=function(value){
   if(typeof value === 'string' && value.trim().length===0) return false
   return true
 }
-const isvalidMobile=function(value){
-  if(typeof value==='undefined' || value===null) return false
-  if(typeof value != Number) return false
-  if(typeof value == Number && value.trim().length===0)return false
-}
+// const isvalidMobile=function(value){
+//   if(typeof value==='undefined' || value===null) return false
+//   if(typeof value != Number) return false
+//   if(typeof value == Number && value.trim().length===0)return false
+// }
 const createintern  = async function (req, res) {
     try{
       const data=req.body
@@ -23,26 +23,24 @@ const createintern  = async function (req, res) {
       if(!isvalid(email)){
         return res.status(400).send({status:false,msg:"Email is missing"})
       }
-      if(!(/^\w+([\.-]?\w+)*@\w([\.-]?\w+)*(\.\W{2,3})+$/.test(email))){
-        return res.status(400).send({
-            status : false,
-            msg : "Email-Id is invalid"
-        })
-       }
+      if (!/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/.test(email)) {
+        return res.status(400).send({status: false,message: "invalid emailId"});
+      }
+  
 
-       if(!isvalidMobile(mobile)){
+       if(!mobile){
         return res.status(400).send({status:false,msg:"Mobile number is missing"})
       }
-      if(!mobile.match(/^(\+\d{1,3}[- ]?)?\d{10}$/)){
+      if(!(/^(\+\d{1,3}[- ]?)?\d{10}$/).test(mobile)){
         return res.status(400).send({status:false,msg:"invalid mobile number"})
       }
 
       const isAlreadyUsed= await internModel.findOne({$or:[{email},{mobile}]});
       if(isAlreadyUsed){
         if(isAlreadyUsed.email==email){
-          return res.status(400).send({status:false,msg:"Email already exist"})
+          return res.status(400).send({status:false,msg:`${email} Email already registered`})
         }else{
-        return res.status(400).send({status:false,msg:`${email} email address already registered`})
+        return res.status(400).send({status:false,msg:`${mobile} mobile number already registered`})
       }}
 
     const savedate=await internModel.create(data)

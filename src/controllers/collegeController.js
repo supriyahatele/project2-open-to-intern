@@ -1,8 +1,46 @@
-const authorModel = require("../models/authorModel")
+const collagemodel = require("../models/collegeModel")
 
 
-const createAuthor = async function (req, res) {
+
+const isvalid=function(value){
+  if(typeof value==='undefined' || value===null) return false
+  if(typeof value !== 'string') return false
+  if(typeof value === 'string' && value.trim().length===0) return false
+  return true
 
 }
 
-module.exports.createAuthor = createAuthor
+// ===============================[createCollage]=========================================
+const createCollage  = async function (req, res) {
+    try{
+    const data=req.body
+    const {name,fullName,logoLink}=data
+    
+    if(!isvalid(name))return res.status(400).send({status:false, msg:"name is required"})
+    // if(!/^/([0-9])w+.test())
+    if(!isvalid(fullName)) return res.status(400).send({status:false, msg:"fullName is required"})
+    if(!isvalid(logoLink)) return res.status(400).send({status:false, msg:"logoLink is required"})
+    if(!isUri(logoLink)) return res.status(400).send({status:false, msg:"logoLink invalid"})
+ 
+    const savedate=await collagemodel.create(data)
+     return res.status(201).send({status:false, msg:" college successfully created",data:savedate })
+
+   }catch(err){
+     return res.status(500).send({status:false, error:err.message})
+   }
+   }
+// ===============================  [getCollageDetail]   ======================================
+   const getCollageDetail  = async function (req, res) {
+    try{
+    const data = req.query
+    const savedate = await collagemodel.find(data)
+     return res.status(200).send({status:false, msg:" college successfully created",data:savedate })
+
+   }catch(err){
+     return res.status(500).send({status:false, error:err.message})
+   }
+   }
+
+
+module.exports = {createCollage,getCollageDetail}
+// module.exports.getCollageDetail= getCollageDetail

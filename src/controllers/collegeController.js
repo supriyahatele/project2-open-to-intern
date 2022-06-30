@@ -42,7 +42,7 @@ const createCollage  = async function (req, res) {
     if(dataCheck)return res.status(400).send({status:false, msg:"name is already exist"})
 
     const savedate=await collagemodel.create(data)
-     return res.status(201).send({status:false, msg:" college  created successfully",data:savedate })
+     return res.status(201).send({status:true, msg:" college  created successfully",data:savedate })
 
    }catch(err){
      return res.status(500).send({status:false, error:err.message})
@@ -70,7 +70,6 @@ const createCollage  = async function (req, res) {
     })
   }
     let newObj = {name: name, fullName: fullName, logoLink: logoLink, interns: intern}
-      // console.log(newObj)
 
     return res.status(200).send({ status: true, data:  newObj})
     

@@ -41,7 +41,7 @@ const createintern  = async function (req, res) {
       }
 
       const isAlreadyUsed= await internModel.findOne({$or:[{email},{mobile}]});
-      console.log(isAlreadyUsed)
+      // console.log(isAlreadyUsed)
       if(isAlreadyUsed){
         if(isAlreadyUsed.email==email){
           return res.status(400).send({status:false,msg:`${email} Email already registered`})

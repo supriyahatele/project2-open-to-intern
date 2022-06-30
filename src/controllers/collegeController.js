@@ -12,7 +12,7 @@ const isvalid=function(value){
 }
 let linkCheck=/(https?:\/\/.*\.(?:jpg|jpeg|png|gif))/i
 let nameCheck = /^[a-zA-Z]+$/
-let fullNameCheck =/[a-zA-Z]+\s[a-z A-Z ]+\s[a-z, A-Z, ]+$/
+let fullNameCheck =/^(?:([A-Za-z]+\-+[A-Za-z])|([A-Za-z])|([A-Za-z]+\ +[A-Za-z])|([([A-Za-z]+\, +[A-Za-z]))+$/
 
 // ===============================[createCollage]=========================================
 const createCollage  = async function (req, res) {

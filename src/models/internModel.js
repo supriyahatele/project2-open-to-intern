@@ -22,7 +22,7 @@ const InternModel= new mongoose.Schema({
     }, 
     collegeId: {
         type:ObjectId,
-        refs:'college',
+        ref:'college',
     },
     isDeleted: {
         type:Boolean,

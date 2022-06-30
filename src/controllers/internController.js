@@ -1,5 +1,6 @@
 const collegeModel = require("../models/collegeModel")
 const internModel = require("../models/internModel")
+const {numberCheck} = require("./collegeController")
 
 
 const isvalid=function(value){
@@ -14,6 +15,9 @@ const createintern  = async function (req, res) {
     try{
       const data=req.body
       const {name,email,mobile, collegeName}=data
+      if(numberCheck(name) || numberCheck(email) || numberCheck(collegeName)){
+        return res.status(400).send({status:false, msg:"Name, email, collegeName should not be number"})
+      }
       if(!isvalid(name)){
         return res.status(400).send({status:false, msg:"Name is required"})
       }
@@ -29,7 +33,7 @@ const createintern  = async function (req, res) {
         return res.status(400).send({status:false,msg:"Mobile number is required"})
       }
       if(!(/^[6-9]\d{9}$/gi).test(mobile)){
-        return res.status(400).send({status:false,msg:"invalid mobile number"})
+        return res.status(400).send({status:false,msg:`${mobile} is invalid mobile number`})
       }
 
       if (!isvalid(collegeName)) {
@@ -46,7 +50,7 @@ const createintern  = async function (req, res) {
       }}
 
     const collegeData = await collegeModel.findOne({name: collegeName})
-    if (!collegeData) return res.status(404).send({ status: false, msg: "College Not found" })
+    if (!collegeData) return res.status(404).send({ status: false, msg: `${collegeName} College Not found` })
 
     data.collegeId= collegeData._id
     

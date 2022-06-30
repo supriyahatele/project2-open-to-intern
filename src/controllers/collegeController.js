@@ -25,7 +25,7 @@ const createCollage  = async function (req, res) {
     // let name= name.toLowerCase()
  
     if(numberCheck(name) || numberCheck(fullName) || numberCheck(logoLink)){
-      return res.status(400).send({status:false, msg:"Name or Fullname LogoLink should not be number"})
+      return res.status(400).send({status:false, msg:"Name, Fullname, LogoLink should not be number"})
     }
     
     if(!isvalid(name))return res.status(400).send({status:false, msg:"name is required"})
@@ -55,9 +55,8 @@ const createCollage  = async function (req, res) {
     try{
     const collegeName = req.query.collegeName
     if (!isvalid(collegeName)) return res.status(400).send({ status: false, msg: " please Enter college Name"})
-
       const savedata = await collagemodel.findOne({ name: collegeName.toLowerCase() })
-    if(!savedata) return res.status(404).send({status:false, msg:" College Not found"})
+    if(!savedata) return res.status(404).send({status:false, msg:`${collegeName} College Not found`})
       const { name, fullName, logoLink } = savedata
 
     let intern = []
@@ -84,4 +83,4 @@ const createCollage  = async function (req, res) {
    }
 
 
-module.exports = {createCollage,getCollageDetail}
+module.exports = {createCollage,getCollageDetail,numberCheck}

@@ -11,8 +11,9 @@ const isvalid=function(value){
 
 }
 let linkCheck=/(https?:\/\/.*\.(?:jpg|jpeg|png|gif))/i
-let nameCheck = /^[a-zA-Z]+$/
-let fullNameCheck =/[a-zA-Z]+\s[a-z A-Z ]+\s[a-z, A-Z, ]+$/
+let nameCheck = /^[a-zA-Z-]+$/
+let fullNameCheck =(/^[a-zA-Z][a-zA-Z,\- ]+[a-zA-Z]+$/)
+
 
 // ===============================[createCollage]=========================================
 const createCollage  = async function (req, res) {
@@ -24,8 +25,8 @@ const createCollage  = async function (req, res) {
     if(!isvalid(name))return res.status(400).send({status:false, msg:"name is required"})
     if(!isvalid(fullName)) return res.status(400).send({status:false, msg:"fullName is required"})
     // =================================================================
-    if(!nameCheck.test(name))return res.status(400).send({status:false, msg:"don't use spaces, number and special character"})
-    if(!fullNameCheck.test(fullName))return res.status(400).send({status:false, msg:"fullName write in correctway"})
+    if(!nameCheck.test(name))return res.status(400).send({status:false, msg:"don't use spaces, number and special character in name"})
+    if(!fullNameCheck.test(fullName))return res.status(400).send({status:false, msg:"dont use special chars in fullname"})
       // =====================================================
     if(!isvalid(logoLink)) return res.status(400).send({status:false, msg:"logoLink is required"})
     
@@ -37,7 +38,7 @@ const createCollage  = async function (req, res) {
     if(dataCheck)return res.status(400).send({status:false, msg:"name is already exist"})
 
     const savedate=await collagemodel.create(data)
-     return res.status(201).send({status:false, msg:" college successfully created",data:savedate })
+     return res.status(201).send({status:false, msg:" college  created successfully",data:savedate })
 
    }catch(err){
      return res.status(500).send({status:false, error:err.message})
@@ -46,8 +47,8 @@ const createCollage  = async function (req, res) {
 // ===============================  [getCollageDetail]   ======================================
    const getCollageDetail  = async function (req, res) {
     try{
-    const collegeName = req.query.name
-    if (!isvalid(collegeName)) return res.status(400).send({ status: false, msg: "Enter valid college Name"})
+    const collegeName = req.query.collegeName
+    if (!isvalid(collegeName)) return res.status(400).send({ status: false, msg: " please Enter college Name"})
 
       const savedata = await collagemodel.findOne({ name: collegeName.toLowerCase() })
     if(!savedata) return res.status(404).send({status:false, msg:" College Not found"})

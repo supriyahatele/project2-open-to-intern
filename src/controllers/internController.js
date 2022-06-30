@@ -18,33 +18,32 @@ const createintern  = async function (req, res) {
       const data=req.body
       const {name,email,mobile, collegeName}=data
       if(!isvalid(name)){
-        return res.status(400).send({status:false, msg:"Name is missing"})
+        return res.status(400).send({status:false, msg:"Name is required"})
       }
 
       if(!isvalid(email)){
-        return res.status(400).send({status:false,msg:"Email is missing"})
+        return res.status(400).send({status:false,msg:"Email is required"})
       }
       if (!/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/.test(email)) {
         return res.status(400).send({status: false,message: "invalid emailId"});
       }
-  
 
        if(!mobile){
-        return res.status(400).send({status:false,msg:"Mobile number is missing"})
+        return res.status(400).send({status:false,msg:"Mobile number is required"})
       }
-      if(!(/^(\+\d{1,3}[- ]?)?\d{10}$/).test(mobile)){
+      if(!(/^[6-9]\d{9}$/gi).test(mobile)){
         return res.status(400).send({status:false,msg:"invalid mobile number"})
       }
 
       if (!isvalid(collegeName)) {
-        return res.status(400).send({ status: false, msg: "College Name is missing" })
+        return res.status(400).send({ status: false, msg: "College Name is required" })
       }
 
       const isAlreadyUsed= await internModel.findOne({$or:[{email},{mobile}]});
       // console.log(isAlreadyUsed)
       if(isAlreadyUsed){
         if(isAlreadyUsed.email==email){
-          return res.status(400).send({status:false,msg:`${email} Email already registered`})
+          return res.status(400).send({status:false,msg:`${email} Email already registered `})
         }else{
         return res.status(400).send({status:false,msg:`${mobile} mobile number already registered`})
       }}
@@ -55,7 +54,7 @@ const createintern  = async function (req, res) {
     data.collegeId= collegeData._id
     
     const savedate=await internModel.create(data)
-     return res.status(201).send({status:false, msg:" intern successfully created",data:savedate })
+     return res.status(201).send({status:false,data:savedate })
 
    }catch(err){
      return res.status(500).send({status:false, error:err.message})

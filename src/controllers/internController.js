@@ -8,11 +8,7 @@ const isvalid=function(value){
   if(typeof value === 'string' && value.trim().length===0) return false
   return true
 }
-// const isvalidMobile=function(value){
-//   if(typeof value==='undefined' || value===null) return false
-//   if(typeof value != Number) return false
-//   if(typeof value == Number && value.trim().length===0)return false
-// }
+// ==============================[create-Intern] ====================================================================
 const createintern  = async function (req, res) {
     try{
       const data=req.body
@@ -38,9 +34,9 @@ const createintern  = async function (req, res) {
       if (!isvalid(collegeName)) {
         return res.status(400).send({ status: false, msg: "College Name is required" })
       }
-
+      // check  if the  db  already  having the given email & mobile no
       const isAlreadyUsed= await internModel.findOne({$or:[{email},{mobile}]});
-      console.log(isAlreadyUsed)
+    
       if(isAlreadyUsed){
         if(isAlreadyUsed.email==email){
           return res.status(400).send({status:false,msg:`${email} Email already registered `})
@@ -48,18 +44,18 @@ const createintern  = async function (req, res) {
         return res.status(400).send({status:false,msg:`${mobile} mobile number already registered`})
       }}
 
-    const collegeData = await collegeModel.findOne({name: collegeName})
-    if (!collegeData) return res.status(404).send({ status: false, msg: "College Not found" })
+     const collegeData = await collegeModel.findOne({name: collegeName})
+     if (!collegeData) return res.status(404).send({ status: false, msg: "College Not found" })
 
-    data.collegeId= collegeData._id
+     data.collegeId= collegeData._id
     
-    const savedate=await internModel.create(data)
+     const savedate=await internModel.create(data)
      return res.status(201).send({status:false,data:savedate })
 
-   }catch(err){
+    }catch(err){
      return res.status(500).send({status:false, error:err.message})
-   }
-   }
+    }
+    }
 
 
 module.exports={createintern}

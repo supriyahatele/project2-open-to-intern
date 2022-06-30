@@ -1,10 +1,11 @@
+
 const mongoose = require('mongoose');
 
 const collegeModel = new mongoose.Schema({
-
+// new mongoose.Schema creates new mongoose schema with object
     name: {
         type: String,
-        required: "Name is required",
+        required:true,
         trim: true,
         unique: true,
         lowercase: true

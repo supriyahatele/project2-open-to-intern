@@ -11,6 +11,7 @@ const isvalid=function(value){
 }
 
 let emailCheck=/^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/
+
 const createintern  = async function (req, res) {
     try{
       const data=req.body
@@ -41,7 +42,6 @@ const createintern  = async function (req, res) {
       }
 
       const isAlreadyUsed= await internModel.findOne({$or:[{email},{mobile}]});
-      // console.log(isAlreadyUsed)
       if(isAlreadyUsed){
         if(isAlreadyUsed.email==email){
           return res.status(400).send({status:false,msg:`${email} Email already registered `})

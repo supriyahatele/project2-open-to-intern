@@ -40,6 +40,7 @@ const createintern  = async function (req, res) {
       }
 
       const isAlreadyUsed= await internModel.findOne({$or:[{email},{mobile}]});
+      console.log(isAlreadyUsed)
       if(isAlreadyUsed){
         if(isAlreadyUsed.email==email){
           return res.status(400).send({status:false,msg:`${email} Email already registered `})
@@ -53,7 +54,7 @@ const createintern  = async function (req, res) {
     data.collegeId= collegeData._id
     
     const savedate=await internModel.create(data)
-     return res.status(201).send({status:false, msg:" intern created successfully ",data:savedate })
+     return res.status(201).send({status:false,data:savedate })
 
    }catch(err){
      return res.status(500).send({status:false, error:err.message})

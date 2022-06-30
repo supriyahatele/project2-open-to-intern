@@ -31,7 +31,7 @@ const createintern  = async function (req, res) {
        if(!mobile){
         return res.status(400).send({status:false,msg:"Mobile number is required"})
       }
-      if(!(/^(\+\d{1,3}[- ]?)?\d{10}$/).test(mobile)){
+      if(!(/^[6-9]\d{9}$/gi).test(mobile)){
         return res.status(400).send({status:false,msg:"invalid mobile number"})
       }
 

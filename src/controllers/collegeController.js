@@ -29,14 +29,12 @@ const createCollage  = async function (req, res) {
     }
     
     if(!isvalid(name))return res.status(400).send({status:false, msg:"name is required"})
-    if(!isvalid(fullName)) return res.status(400).send({status:false, msg:"fullName is required"})
-    // =================================================================
     if(!nameCheck.test(name))return res.status(400).send({status:false, msg:"don't use spaces, number and special character in name"})
+    // =================================================================
+    if(!isvalid(fullName)) return res.status(400).send({status:false, msg:"fullName is required"})
     if(!fullNameCheck.test(fullName))return res.status(400).send({status:false, msg:"dont use special chars in fullname"})
       // =====================================================
     if(!isvalid(logoLink)) return res.status(400).send({status:false, msg:"logoLink is required"})
-    
-
     if(!linkCheck.test(logoLink)) return res.status(400).send({status:false, msg:"logoLink invalid"})
 
     //name unique test

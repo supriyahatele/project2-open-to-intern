@@ -21,6 +21,8 @@ let fullNameCheck =/^(?:([A-Za-z]+\-+[A-Za-z])|([A-Za-z])|([A-Za-z]+\ \1+[A-Za-z
 const createCollage  = async function (req, res) {
     try{
     const data=req.body
+
+    if (Object.keys(data).length == 0) return res.status(400).send({ status: false, msg: "Fill all the college requirement" })
     const {name,fullName,logoLink}=data
     // let name= name.toLowerCase()
  

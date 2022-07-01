@@ -15,6 +15,7 @@ let emailCheck=/^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/
 const createintern  = async function (req, res) {
     try{
       const data=req.body
+      if (Object.keys(data).length == 0) return res.status(400).send({ status: false, msg: "Fill all the intern requirement" })
       const {name,email,mobile, collegeName}=data
       if(numberCheck(name) || numberCheck(email) || numberCheck(collegeName)){
         return res.status(400).send({status:false, msg:"Name, email, collegeName should not be number"})

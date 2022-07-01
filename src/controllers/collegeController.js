@@ -2,7 +2,9 @@ const collagemodel = require("../models/collegeModel")
 const internModel = require("../models/internModel")
 
 
-
+const numberCheck=function(value){
+  if(typeof value === 'number') return true
+}
 const isvalid=function(value){
   if(typeof value==='undefined' || value===null) return false
   if(typeof value !== 'string') return false
@@ -10,17 +12,23 @@ const isvalid=function(value){
   return true
 
 }
-let linkCheck=/(https?:\/\/.*\.(?:jpg|jpeg|png|gif))/i
-let nameCheck = /^[a-zA-Z-]+$/
-let fullNameCheck =(/^[a-zA-Z][a-zA-Z,\- ]+[a-zA-Z]+$/)
 
+let linkCheck=/(https?:\/\/.*\.(?:jpg|jpeg|png|gif))/i
+let nameCheck = /^[a-zA-Z]+$/
+let fullNameCheck =/^(?:([A-Za-z]+\-+[A-Za-z])|([A-Za-z])|([A-Za-z]+\ +[A-Za-z])|([([A-Za-z]+\, +[A-Za-z]))+$/
 
 // ===============================[create-Collage]=========================================
+
 const createCollage  = async function (req, res) {
     try{
     const data=req.body
     const {name,fullName,logoLink}=data
-   
+    // let name= name.toLowerCase()
+ 
+    if(numberCheck(name) || numberCheck(fullName) || numberCheck(logoLink)){
+      return res.status(400).send({status:false, msg:"Name, Fullname, LogoLink should not be number"})
+    }
+    
     if(!isvalid(name))return res.status(400).send({status:false, msg:"name is required"})
     if(!nameCheck.test(name))return res.status(400).send({status:false, msg:"don't use spaces, number and special character in name"})
 
@@ -49,10 +57,8 @@ const createCollage  = async function (req, res) {
      const collegeName = req.query.collegeName     //getting data from query
     // should not be empty
     if (!isvalid(collegeName)) return res.status(400).send({ status: false, msg: " please Enter college Name"})
-
-    // call to db
       const savedata = await collagemodel.findOne({ name: collegeName.toLowerCase() })
-      if(!savedata) return res.status(404).send({status:false, msg:" College Not found"})
+    if(!savedata) return res.status(404).send({status:false, msg:`${collegeName} College Not found`})
       const { name, fullName, logoLink } = savedata
 
     let intern = []
@@ -83,4 +89,4 @@ const createCollage  = async function (req, res) {
    }
 
 
-module.exports = {createCollage,getCollageDetail}
+module.exports = {createCollage,getCollageDetail,numberCheck}

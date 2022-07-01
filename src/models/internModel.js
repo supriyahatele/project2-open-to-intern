@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Schema.Types.ObjectId
 
-
+// ObjectId is the  id from another schema we r taking as ref
 const InternModel= new mongoose.Schema({
     name: {
         type:String,
@@ -22,7 +22,7 @@ const InternModel= new mongoose.Schema({
     }, 
     collegeId: {
         type:ObjectId,
-        refs:'college',
+        ref:'college',
     },
     isDeleted: {
         type:Boolean,

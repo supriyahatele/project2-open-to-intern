@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 
 const collegeModel = new mongoose.Schema({
-// new mongoose.Schema creates new mongoose schema with object
+// new mongoose.Schema creates new mongoose schema with object having key and value
     name: {
         type: String,
         required:true,
@@ -13,8 +13,7 @@ const collegeModel = new mongoose.Schema({
     fullName: {
         type: String,
         trim: true,
-        required:true,
-        unique: true
+        required:true
     },
     logoLink: {
         required:true,

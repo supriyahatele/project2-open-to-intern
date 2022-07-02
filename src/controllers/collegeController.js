@@ -63,23 +63,15 @@ const createCollage  = async function (req, res) {
     if(!savedata) return res.status(404).send({status:false, msg:`${collegeName} College Not found`})
       const { name, fullName, logoLink } = savedata
 
-    let intern = []
     // searching all interns in the respected clg with the clg id of intern
-    const internData = await internModel.find({collegeId: savedata._id})
-    
-    
-    if(internData.length == 0)  {
-      intern= "no interns"
-    }
-    // taking intern one by one and  pushing only( _id, name, email, mobile) of  all interns into intern array
-    else{
-    internData.forEach(x => {
-      let {_id, name, email, mobile} = x
-      intern.push({ _id, name, email, mobile })
-    })
-    }
+    const internData = await internModel.find({collegeId: savedata._id}).select({ name:1,email:1,mobile:1})
+
     // created new object and storing all clg and intern details in it.
-    let newObj = {name: name, fullName: fullName, logoLink: logoLink, interns: intern}
+    let newObj = {name: name, fullName: fullName, logoLink: logoLink, interns: internData}
+    if(internData.length===0){
+      internData[0]="no interns"
+      return res.status(404).send({status:false,data:newObj})
+    }
 
     return res.status(200).send({ status: true, data:  newObj})
     

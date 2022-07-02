@@ -15,13 +15,15 @@ const isvalid=function(value){
 
 let linkCheck=/(https?:\/\/.*\.(?:jpg|jpeg|png|gif))/i
 let nameCheck = /^[a-zA-Z]+$/
-let fullNameCheck =/^(?:([A-Za-z]+\-+[A-Za-z])|([A-Za-z])|([A-Za-z]+\ +[A-Za-z])|([([A-Za-z]+\, +[A-Za-z]))+$/
+let fullNameCheck =/^(?:([A-Za-z]+\-+[A-Za-z])|([A-Za-z])|([A-Za-z]+\ \1+[A-Za-z])|([([A-Za-z]+\, \1+[A-Za-z]))+$/
 
 // ===============================[create-Collage]=========================================
 
 const createCollage  = async function (req, res) {
     try{
     const data=req.body
+
+    if (Object.keys(data).length == 0) return res.status(400).send({ status: false, msg: "Fill all the college requirement" })
     const {name,fullName,logoLink}=data
     // let name= name.toLowerCase()
  
@@ -31,7 +33,7 @@ const createCollage  = async function (req, res) {
     
     if(!isvalid(name))return res.status(400).send({status:false, msg:"name is required"})
     if(!nameCheck.test(name))return res.status(400).send({status:false, msg:"don't use spaces, number and special character in name"})
-
+    
     if(!isvalid(fullName)) return res.status(400).send({status:false, msg:"fullName is required"})
     if(!fullNameCheck.test(fullName))return res.status(400).send({status:false, msg:"dont use special chars in fullname"})
 
@@ -41,7 +43,7 @@ const createCollage  = async function (req, res) {
       const dataCheck = await collagemodel.findOne({ name: name.toLowerCase()})
      if(dataCheck)return res.status(400).send({status:false, msg:"name is already exist"})
 
-     const savedate=await collagemodel.create(data)
+    const savedate=await collagemodel.create(data)
      return res.status(201).send({status:true, msg:" college  created successfully",data:savedate })
 
    }catch(err){
@@ -78,7 +80,6 @@ const createCollage  = async function (req, res) {
     }
     // created new object and storing all clg and intern details in it.
     let newObj = {name: name, fullName: fullName, logoLink: logoLink, interns: intern}
-     
 
     return res.status(200).send({ status: true, data:  newObj})
     

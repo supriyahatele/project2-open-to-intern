@@ -5,15 +5,17 @@ const {numberCheck} = require("./collegeController")
 
 const isvalid=function(value){
   if(typeof value==='undefined' || value===null) return false
-  if(typeof value!='string')return false
+  if(typeof value!='string') return false
   if(typeof value === 'string' && value.trim().length===0) return false
   return true
 }
 
 let emailCheck=/^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/
+
 const createintern  = async function (req, res) {
     try{
       const data=req.body
+      if (Object.keys(data).length == 0) return res.status(400).send({ status: false, msg: "Fill all the intern requirement" })
       const {name,email,mobile, collegeName}=data
       if(numberCheck(name) || numberCheck(email) || numberCheck(collegeName)){
         return res.status(400).send({status:false, msg:"Name, email, collegeName should not be number"})
@@ -41,7 +43,6 @@ const createintern  = async function (req, res) {
       }
       // check  if the  db  already  having the given email & mobile no
       const isAlreadyUsed= await internModel.findOne({$or:[{email},{mobile}]});
-      // console.log(isAlreadyUsed)
       if(isAlreadyUsed){
         if(isAlreadyUsed.email==email){
           return res.status(400).send({status:false,msg:`${email} Email already registered `})
@@ -54,7 +55,7 @@ const createintern  = async function (req, res) {
 
      data.collegeId= collegeData._id
     
-     const savedate=await internModel.create(data)
+    const savedate=await internModel.create(data)
      return res.status(201).send({status:true,data:savedate })
 
     }catch(err){
